@@ -13,7 +13,7 @@ recipeCloseBtn.addEventListener('click', () => {
 // get meal list that matches with the ingridients
 function getMealList(){
     let searchInputTxt = document.getElementById('search-input').value.trim();
-    fetch('www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}')
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`)
     .then(response => response.json())
     .then(data => {
         let html = "";
@@ -25,7 +25,7 @@ function getMealList(){
                             <img src= "${meal.strMealThumb}" alt="food">
                     </div>
                     <div class="meal-name">
-                            <h3>${meal-strMeal}</h3>
+                            <h3>${meal.strMeal}</h3>
                                 <a href="#" class="recipe-btn">Get Recipe</a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ function getMealRecipe(e){
     e.preventDefault();
     if(e.target.classList.contain('recipe-btn')){
         let mealItem = e.target.parentElement.parentElement;
-        fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItem.dataset.id}')
+        fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItem.dataset.id}`)
         .then(response => response.json())
         .then(data => mealRecipeModal(data.meals));
     }
